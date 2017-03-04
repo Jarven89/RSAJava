@@ -1,4 +1,5 @@
 package com.jarvan.utils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,7 +17,6 @@ import com.google.gson.JsonParser;
 
 public class Test {
 
-
 	// public static final Config config =
 	// ConfigFactory.load("authorization.conf").withFallback(ConfigFactory.load());
 	private static final String DESKEY = "1R2O3N4G5C6L7O8U9D0S0E2C3U4R5E6K7E8Y9";
@@ -33,11 +33,11 @@ public class Test {
 			String pb = config.get(0);
 			String pv = config.get(1);
 			// 验证签名
-			boolean status = RSAUtils.verify(RSAUtils.decode(license), pb, sign);
+			boolean status = RSAUtils.verify(RSAUtils.decode(StringEscapeUtils.unescapeJava(license)), StringEscapeUtils.unescapeJava(pb), StringEscapeUtils.unescapeJava(sign));
 			if (!status) {
 				System.out.println(status);
 			}
-			byte[] decodedData = RSAUtils.decryptByPrivateKey(RSAUtils.decode(license), pv);
+			byte[] decodedData = RSAUtils.decryptByPrivateKey(RSAUtils.decode(StringEscapeUtils.unescapeJava(license)), StringEscapeUtils.unescapeJava(pv));
 			// 做DES对称解密
 			String target = DES.decrypt(RSAUtils.encode(DESKEY.getBytes()).getBytes(), decodedData);
 			System.out.println(target);
@@ -103,11 +103,11 @@ public class Test {
 			PrintWriter pw2 = new PrintWriter(new FileOutputStream("src/authorization.conf"), true);
 			// 写入自己公钥 和 客户私钥
 			// pw2.print("pb=\"");
-			pw2.print(publicKey);
+			pw2.print(StringEscapeUtils.escapeJava(publicKey));
 			// pw2.print("\"");
 			pw2.print("\n");
 			// pw2.print("pv=\"");
-			pw2.print(privateKey_custom);
+			pw2.print(StringEscapeUtils.escapeJava(privateKey_custom));
 			// pw2.print("\"");
 			// 写入签名
 			pw2.print("\n");
@@ -149,6 +149,7 @@ public class Test {
 			// 一次读入一行，直到读入null为文件结束
 			while ((tempString = reader.readLine()) != null) {
 				// 显示行号
+				System.out.println(tempString);
 				list.add(tempString);
 				line++;
 			}
@@ -169,8 +170,8 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		// Test.readFileByLines("");
-		Test.createConf();
-		Test.readConf();
+//		Test.createConf();
+		 Test.readConf();
 		// System.out.println(Base64Utils.encode(DESKEY.getBytes()));
 	}
 
