@@ -204,7 +204,7 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		// Test.readFileByLines("");
+		// Test.readFileByLines("");4668725532
 		String license = "{\"appl\":2,\"ucl\":100,\"cid\":\"dh\",\"vs\":\"V1.4\",\"vli\":1488956022000,\"ic\":false}";
 		Authorization authorization = new Authorization();
 		sc = new Scanner(System.in);
@@ -212,8 +212,9 @@ public class Test {
 
 			System.out.println("是否验证(true/false):");
 			String ic = sc.next();
-			System.out.println("是否验证:" + ic);
-			authorization.setVs(ic);
+			authorization.setIc(new Boolean(ic));
+			System.out.println("是否验证:" + authorization.isIc());
+			
 			if (ic.equals("true")) {
 				System.out.println("输入APP限制(int):");
 				String appl = sc.next();
@@ -237,7 +238,7 @@ public class Test {
 				System.out.println("输入到期时间(毫秒):");
 				String vli = sc.next();
 				System.out.println("到期时间为:" + timeStamp2Date(vli, "yyyy-MM-dd HH:mm:ss"));
-				authorization.setVs(vli);
+				authorization.setVli(Long.parseLong(vli));
 
 			}
 

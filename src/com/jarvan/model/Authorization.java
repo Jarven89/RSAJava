@@ -1,12 +1,12 @@
 package com.jarvan.model;
 
 public class Authorization {
-	private int appl = 1;
-	private long ucl = 1000;
-	private String cid = "";
-	private String vs = "V1.4";
-	private long vli = 0;
-	private boolean ic = false;
+	private int appl = 1; //app限制
+	private long ucl = 1000;//用户限制
+	private String cid = "";//用户 ID
+	private String vs = "V1.4";//版本号
+	private long vli = 0;//过期时间
+	private boolean ic = false;//是否验证
 
 	public int getAppl() {
 		return appl;
